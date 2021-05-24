@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "425280475752",
+    "project_id": "safarkar-f1927",
+    "storage_bucket": "safarkar-f1927.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:425280475752:android:6e4b14ed5e903cc93221dd",
+        "android_client_info": {
+          "package_name": "com.example.safarkarappfyp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "425280475752-2mf009pt122sppsrcdhnq1f9spru8hl4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDACpVsYu2Jn593jU0LGwNzJyX09tevc0Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "425280475752-2mf009pt122sppsrcdhnq1f9spru8hl4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
