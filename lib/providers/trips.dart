@@ -32,6 +32,8 @@ class TripTypeProvider extends ChangeNotifier {
     ),
   ];
 
+  // this is not a provide it's my silly mistake
+
   List<Trip> get getTrips {
     return [..._trip];
   }
