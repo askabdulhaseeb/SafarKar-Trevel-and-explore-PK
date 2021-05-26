@@ -7,6 +7,7 @@ import 'package:safarkarappfyp/database/userLocalData.dart';
 import 'package:safarkarappfyp/models/plan.dart';
 import 'package:safarkarappfyp/providers/placesproviders.dart';
 import 'package:safarkarappfyp/providers/tripDateTimeProvider.dart';
+import 'package:safarkarappfyp/screens/homeScreen/homeScreen.dart';
 
 class SavePlanButton extends StatelessWidget {
   final GlobalKey<FormState> _globalKey;
@@ -44,6 +45,10 @@ class SavePlanButton extends StatelessWidget {
             returnDate: tripDateTimeProvider?.endingDate?.getFormatedDate(),
           );
           await PlanMethods().storePlanAtFirebase(_plan);
+          Navigator.of(context).pushNamedAndRemoveUntil(
+            HomeScreen.routeName,
+            (route) => false,
+          );
         } else {
           print('Error in Button');
         }

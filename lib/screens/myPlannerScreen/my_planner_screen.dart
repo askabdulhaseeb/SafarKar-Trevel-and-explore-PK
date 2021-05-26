@@ -30,7 +30,7 @@ class _MyPlannerScreenState extends State<MyPlannerScreen> {
         // print('Add 2: ${plan.destinationPlaceID}');
         disPlace = await PlacesMethods()
             .getPlacesObjectFromFirebase(plan.destinationPlaceID);
-        _places.putIfAbsent(plan.destinationPlaceID, () => depPlace);
+        _places.putIfAbsent(plan.destinationPlaceID, () => disPlace);
       }
     });
   }
@@ -63,7 +63,6 @@ class _MyPlannerScreenState extends State<MyPlannerScreen> {
                       _plan.add(Plan.fromDocument(docs));
                     });
                     _getAllPlaces();
-                    print(_places);
                   }
                   return Expanded(
                     child: ListView.builder(
