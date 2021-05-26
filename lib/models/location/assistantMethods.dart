@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
 import 'package:safarkarappfyp/core/myAPIs.dart';
-import 'package:safarkarappfyp/database/databaseMethod.dart';
 import 'package:safarkarappfyp/database/placesMethods.dart';
 import 'package:safarkarappfyp/models/location/placesPreditions.dart';
 import 'package:safarkarappfyp/providers/placesproviders.dart';
@@ -187,7 +186,7 @@ class AssistantMethods {
     if (_place != null) {
       Provider.of<PlacesProvider>(context, listen: false)
           .updateStartingPoint(_place);
-      PlacesMethods().storePlaceInfoInFirebase(_place);
+      PlacesMethods()?.storePlaceInfoInFirebase(_place);
     }
   }
 

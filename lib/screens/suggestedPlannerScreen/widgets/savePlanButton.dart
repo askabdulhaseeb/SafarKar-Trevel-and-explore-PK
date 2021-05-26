@@ -41,7 +41,7 @@ class SavePlanButton extends StatelessWidget {
                 tripDateTimeProvider?.returnTime?.getFormatedTime(),
             departureDate:
                 tripDateTimeProvider?.startingDate?.getFormatedDate(),
-            returnDate: tripDateTimeProvider?.returnTime?.getFormatedTime(),
+            returnDate: tripDateTimeProvider?.endingDate?.getFormatedDate(),
           );
           await PlanMethods().storePlanAtFirebase(_plan);
         } else {
