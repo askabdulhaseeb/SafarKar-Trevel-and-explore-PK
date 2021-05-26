@@ -59,13 +59,13 @@ AppBar homeAppBar(context) {
     actions: [
       Padding(
         padding: const EdgeInsets.only(right: 20),
-        child: InkWell(
+        child: GestureDetector(
           onTap: () async {
-            await AssistantMethods.getEndingPositionFromAPI(
+            AssistantMethods.getEndingPositionFromAPI(
               'ChIJpV--2wg_IjkRncKTQJKoXrQ',
               context,
             );
-            await AssistantMethods.getStartingPositionFromAPI(
+            AssistantMethods.getStartingPositionFromAPI(
               'ChIJa-SNe8NHsz4Rhgk1dLoNEEs',
               context,
             );

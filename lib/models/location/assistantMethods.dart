@@ -3,6 +3,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
 import 'package:safarkarappfyp/core/myAPIs.dart';
 import 'package:safarkarappfyp/database/databaseMethod.dart';
+import 'package:safarkarappfyp/database/placesMethods.dart';
 import 'package:safarkarappfyp/models/location/placesPreditions.dart';
 import 'package:safarkarappfyp/providers/placesproviders.dart';
 import 'requestAssistants.dart';
@@ -176,7 +177,7 @@ class AssistantMethods {
   static void getStartingPositionFromAPI(
       String placeID, BuildContext context) async {
     Place _place;
-    _place = await DatabaseMethods().getPlacesObjectFromFirebase(placeID);
+    _place = await PlacesMethods().getPlacesObjectFromFirebase(placeID);
     if (_place == null) {
       _place = await _getPlaceObjectFromAPI(placeID, context);
       print('Places Data Fetch From Google API');
@@ -186,14 +187,14 @@ class AssistantMethods {
     if (_place != null) {
       Provider.of<PlacesProvider>(context, listen: false)
           .updateStartingPoint(_place);
-      DatabaseMethods().storePlaceInfoInFirebase(_place);
+      PlacesMethods().storePlaceInfoInFirebase(_place);
     }
   }
 
   static void getEndingPositionFromAPI(
       String placeID, BuildContext context) async {
     Place _place;
-    _place = await DatabaseMethods().getPlacesObjectFromFirebase(placeID);
+    _place = await PlacesMethods().getPlacesObjectFromFirebase(placeID);
     if (_place == null) {
       _place = await _getPlaceObjectFromAPI(placeID, context);
       print('Places Data Fetch From Google API');
@@ -203,7 +204,7 @@ class AssistantMethods {
     if (_place != null) {
       Provider.of<PlacesProvider>(context, listen: false)
           .updateEndingPoint(_place);
-      DatabaseMethods().storePlaceInfoInFirebase(_place);
+      PlacesMethods().storePlaceInfoInFirebase(_place);
     }
   }
 }

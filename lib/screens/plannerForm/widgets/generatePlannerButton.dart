@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:safarkarappfyp/core/myColors.dart';
-import 'package:safarkarappfyp/database/databaseMethod.dart';
+import 'package:safarkarappfyp/database/placesMethods.dart';
 import 'package:safarkarappfyp/providers/placesproviders.dart';
 import 'package:safarkarappfyp/providers/tripDateTimeProvider.dart';
 import 'package:safarkarappfyp/screens/suggestedPlannerScreen/seggestedPlannerScreen.dart';
@@ -59,9 +59,9 @@ class GeneratePlannerButton extends StatelessWidget {
         timeInSecForIosWeb: 4,
       );
     } else {
-      DatabaseMethods().storePlaceInfoInFirebase(
+      PlacesMethods().storePlaceInfoInFirebase(
           Provider.of<PlacesProvider>(context, listen: false).startingPoint);
-      DatabaseMethods().storePlaceInfoInFirebase(
+      PlacesMethods().storePlaceInfoInFirebase(
           Provider.of<PlacesProvider>(context, listen: false).endingPoint);
       Navigator.of(context).pushNamed(SuggestedPlannerScreen.routeName);
     }

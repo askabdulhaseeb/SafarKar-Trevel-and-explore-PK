@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:safarkarappfyp/core/myColors.dart';
 import 'package:safarkarappfyp/database/databaseMethod.dart';
+import 'package:safarkarappfyp/database/placesMethods.dart';
 import 'package:safarkarappfyp/database/userLocalData.dart';
 import 'package:safarkarappfyp/models/plan.dart';
 import 'package:safarkarappfyp/providers/placesproviders.dart';
@@ -37,7 +38,7 @@ class SavePlanButton extends StatelessWidget {
             departureDate: tripDateTimeProvider.startingDate.getFormatedDate(),
             returnDate: tripDateTimeProvider.returnTime.getFormatedTime(),
           );
-          await DatabaseMethods().storePlanAtFirebase(_plan);
+          await PlacesMethods().storePlanAtFirebase(_plan);
         } else {
           print('Error in Button');
         }

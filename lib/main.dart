@@ -31,15 +31,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider.value(
-          value: TripTypeProvider(),
-        ),
-        ChangeNotifierProvider.value(
-          value: PlacesProvider(),
-        ),
-        ChangeNotifierProvider.value(
-          value: TripDateTimeProvider(),
-        ),
+        ChangeNotifierProvider.value(value: TripTypeProvider()),
+        ChangeNotifierProvider.value(value: PlacesProvider()),
+        ChangeNotifierProvider.value(value: TripDateTimeProvider()),
       ],
       child: Consumer<TripTypeProvider>(
         builder: (context, value, child) {

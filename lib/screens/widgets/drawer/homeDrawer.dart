@@ -38,21 +38,31 @@ class HomeDrawer extends StatelessWidget {
                 ),
                 Divider(color: Colors.grey),
                 DrawerTile(
-                    icon: Icons.collections_bookmark_outlined,
-                    title: 'My Planners',
-                    onPress: () {}),
+                  icon: Icons.collections_bookmark_outlined,
+                  title: 'My Planners',
+                  onPress: () {},
+                ),
                 DrawerTile(
-                    icon: Icons.settings, title: 'Settings', onPress: () {}),
+                  icon: Icons.settings,
+                  title: 'Settings',
+                  onPress: () {},
+                ),
+                DrawerTile(
+                  icon: Icons.report,
+                  title: 'Report Problem',
+                  onPress: () {},
+                ),
               ],
             ),
             DrawerTile(
-                icon: Icons.logout,
-                title: 'Sign out',
-                onPress: () {
-                  AuthMethods().signOut();
-                  Navigator.of(context)
-                      .pushReplacementNamed(LoginScreen.routeName);
-                }),
+              icon: Icons.logout,
+              title: 'Sign out',
+              onPress: () {
+                AuthMethods().signOut();
+                Navigator.of(context)
+                    .pushReplacementNamed(LoginScreen.routeName);
+              },
+            ),
           ],
         ),
       ),
