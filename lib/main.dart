@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:safarkarappfyp/core/myColors.dart';
 import 'package:safarkarappfyp/screens/placeDeatilScreen/placeDetailScreen.dart';
+import 'package:safarkarappfyp/screens/profileScreen/profile_screen.dart';
 import './screens/suggestedPlannerScreen/seggestedPlannerScreen.dart';
 import './providers/tripDateTimeProvider.dart';
 import './database/userLocalData.dart';
@@ -60,6 +61,7 @@ class MyApp extends StatelessWidget {
               SearchEndingPoint.routeName: (ctx) => SearchEndingPoint(),
               PlannerListViewScreen.routeName: (ctx) => PlannerListViewScreen(),
               PlannerMapScreen.routeName: (ctx) => PlannerMapScreen(),
+              ProfileScreen.routeName: (ctx) => ProfileScreen(),
             },
           );
         },

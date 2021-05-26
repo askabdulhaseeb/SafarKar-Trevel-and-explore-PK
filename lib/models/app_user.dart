@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class AppUser {
@@ -6,6 +7,7 @@ class AppUser {
   final String displayName;
   final String email;
   final String phoneNumber;
+  final String imageURL;
   final List<String> interest;
 
   AppUser({
@@ -13,6 +15,7 @@ class AppUser {
     @required this.displayName,
     @required this.email,
     @required this.phoneNumber,
+    @required this.imageURL,
     @required this.interest,
   });
 
@@ -22,32 +25,19 @@ class AppUser {
       'displayName': displayName,
       'email': email,
       'phoneNumber': phoneNumber,
+      'imageURL': imageURL,
       'interest': interest,
     };
   }
 
-  factory AppUser.fromDocument(docs) {
+  factory AppUser.fromDocument(DocumentSnapshot docs) {
     return AppUser(
-      uid: docs.data()['uid'],
-      displayName: docs.data()['displayName'],
-      email: docs.data()['email'],
-      phoneNumber: docs.data()['phoneNumber'],
-      interest: List<String>.from(docs.data()['interest']),
+      uid: docs?.data()['uid'].toString(),
+      displayName: docs?.data()['displayName'].toString() ?? '',
+      email: docs?.data()['email'].toString() ?? '',
+      phoneNumber: docs?.data()['phoneNumber'].toString() ?? '',
+      imageURL: docs?.data()['imageURL'].toString() ?? '',
+      interest: List<String>.from(docs?.data()['interest'] ?? []) ?? [],
     );
   }
-
-  factory AppUser.fromMap(Map<String, dynamic> map) {
-    return AppUser(
-      uid: map['uid'],
-      displayName: map['displayName'],
-      email: map['email'],
-      phoneNumber: map['phoneNumber'],
-      interest: List<String>.from(map['interest']),
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory AppUser.fromJson(String source) =>
-      AppUser.fromMap(json.decode(source));
 }

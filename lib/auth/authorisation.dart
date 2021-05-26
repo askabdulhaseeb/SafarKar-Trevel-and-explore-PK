@@ -30,6 +30,23 @@ class AuthMethods {
       UserCredential result =
           await _firebaseAuth.signInWithCredential(credential);
 
+      final exist =
+          await DatabaseMethods().getUserInfofromFirebase(result.user.uid);
+      if (!exist.exists) {
+        DatabaseMethods().addUserInfoToFirebase(
+          userId: result.user.uid,
+          name: result.user.displayName ?? '',
+          phoneNumber: result.user.phoneNumber ?? '',
+          email: result.user.email ?? '',
+          imageURL: result.user.photoURL ?? '',
+        );
+      } else {
+        DatabaseMethods().updateUserDoc(uid: result.user.uid, userMap: {
+          'displayName': result.user.displayName,
+          'imageURL': result.user.photoURL,
+        });
+      }
+
       if (result != null) {
         User user = result.user;
         DatabaseMethods().storeUserInfoInLocalStorageFromGoogle(user);
