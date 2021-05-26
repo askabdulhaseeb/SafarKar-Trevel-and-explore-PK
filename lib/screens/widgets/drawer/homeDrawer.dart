@@ -3,6 +3,7 @@ import 'package:safarkarappfyp/auth/authorisation.dart';
 import 'package:safarkarappfyp/core/myColors.dart';
 import 'package:safarkarappfyp/core/myFonts.dart';
 import 'package:safarkarappfyp/database/userLocalData.dart';
+import 'package:safarkarappfyp/screens/myPlannerScreen/my_planner_screen.dart';
 import 'circlerImageLarge.dart';
 import '../../auth/loginScreen/loginScreen.dart';
 import 'drawerTile.dart';
@@ -40,7 +41,9 @@ class HomeDrawer extends StatelessWidget {
                 DrawerTile(
                   icon: Icons.collections_bookmark_outlined,
                   title: 'My Planners',
-                  onPress: () {},
+                  onPress: () {
+                    Navigator.of(context).pushNamed(MyPlannerScreen.routeName);
+                  },
                 ),
                 DrawerTile(
                   icon: Icons.settings,

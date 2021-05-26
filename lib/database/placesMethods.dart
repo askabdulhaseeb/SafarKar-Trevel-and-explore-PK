@@ -25,45 +25,12 @@ class PlacesMethods {
   }
 
   Future<Place> getPlacesObjectFromFirebase(String pid) async {
-    DocumentSnapshot place = await FirebaseFirestore.instance
+    final DocumentSnapshot docs = await FirebaseFirestore.instance
         .collection("places")
         .doc(pid)
         .get()
-        .then((place) => null)
         .onError((error, stackTrace) => null);
-
-    // if (place.data() != null) {
-    // Place newPlace = Place(
-    //     id: pid,
-    //     name: place.data()['name'],
-    //     lat: place.data()['lat'],
-    //     long: place.data()['lng'],
-    //     address: place.data()['formatted_address'],
-    //     imageUrl: place.data()['image_url'],
-    //     rating: (place.data()['rating'] + 0.0),
-    //     types: (place.data()['types'] == null)
-    //         ? []
-    //         : place.data()['types'].cast<String>(),
-    //     // reviews: List<Map<String, dynamic>>.generate(
-    //     //   place.data()['reviews'].length,
-    //     //   (index) =>
-    //     //   List<Map<String,dynamic>>.
-    //     //   from(place.data()['reviews'].elementAt(index));
-    //     // ),
-    //   );
-    //   print('${newPlace.getPlaceName()} ID: ${newPlace.getPlaceID()}');
-    //   return newPlace;
-    // }
-    return null;
-  }
-
-  storePlanAtFirebase(Plan plan) async {
-    //
-    await FirebaseFirestore.instance
-        .collection('plans')
-        .add(plan.toMap())
-        .catchError((Object obj) {
-      print('Error');
-    });
+    Place tempPlace = Place.fromDocument(docs);
+    return tempPlace;
   }
 }

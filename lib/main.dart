@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:safarkarappfyp/core/myColors.dart';
+import 'package:safarkarappfyp/screens/myPlannerScreen/my_planner_screen.dart';
 import 'package:safarkarappfyp/screens/placeDeatilScreen/placeDetailScreen.dart';
 import 'package:safarkarappfyp/screens/profileScreen/profile_screen.dart';
 import './screens/suggestedPlannerScreen/seggestedPlannerScreen.dart';
@@ -61,6 +62,7 @@ class MyApp extends StatelessWidget {
               SearchEndingPoint.routeName: (ctx) => SearchEndingPoint(),
               PlannerListViewScreen.routeName: (ctx) => PlannerListViewScreen(),
               PlannerMapScreen.routeName: (ctx) => PlannerMapScreen(),
+              MyPlannerScreen.routeName: (ctx) => MyPlannerScreen(),
               ProfileScreen.routeName: (ctx) => ProfileScreen(),
             },
           );

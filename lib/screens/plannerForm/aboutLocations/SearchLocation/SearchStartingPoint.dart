@@ -69,7 +69,7 @@ class _SearchStartingPointState extends State<SearchStartingPoint> {
                     itemBuilder: (context, index) {
                       return InkWell(
                         onTap: () async {
-                          await AssistantMethods.getStartingPositionFromAPI(
+                          AssistantMethods.getStartingPositionFromAPI(
                             _placesPreditions[index].place_id,
                             context,
                           );

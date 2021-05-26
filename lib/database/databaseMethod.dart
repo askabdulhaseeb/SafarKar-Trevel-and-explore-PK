@@ -20,7 +20,7 @@ class DatabaseMethods {
       'imageURL': imageURL?.trim() ?? '',
     };
     return await FirebaseFirestore.instance
-        .collection("users")
+        .collection(_fUser)
         .doc(userId)
         .set(userInfoMap)
         .catchError((Object obj) {
@@ -47,7 +47,7 @@ class DatabaseMethods {
   }
 
   Future<DocumentSnapshot> getUserInfofromFirebase(String uid) async {
-    return FirebaseFirestore.instance.collection("users").doc(uid).get();
+    return FirebaseFirestore.instance.collection(_fUser).doc(uid).get();
   }
 
   updateUserDoc(

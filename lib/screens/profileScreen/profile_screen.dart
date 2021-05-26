@@ -29,7 +29,7 @@ class ProfileScreen extends StatelessWidget {
               _user.displayName,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
-            )
+            ),
           ],
         ),
       ),

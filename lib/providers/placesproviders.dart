@@ -60,41 +60,38 @@ class Place {
   String getPlaceImageUrl() => this._imageUrl;
   List<Map<String, dynamic>> getPlaceReviews() => this._reviews;
 
-  //
-  // Functions
-  //
-  // updatePlace(
-  //   String id,
-  //   String name,
-  //   String address,
-  //   String url,
-  //   double lat,
-  //   double lang,
-  // ) {
-  //   this._placeID = id;
-  //   this._placeName = name;
-  //   this._placesFormattedAddrees = address;
-  //   this._imageUrl = url;
-  //   this._latitude = lat;
-  //   this._longitude = lang;
-  // }
-
   Map<String, dynamic> toMap() {
     return {
-      'place_id': _placeID,
-      'name': _placeName,
-      'rating': _rating,
-      'types': _types,
-      'lat': _latitude,
-      'lng': _longitude,
-      'formatted_address': _placesFormattedAddrees,
-      'image_url': _imageUrl,
-      'reviews': _reviews,
+      'place_id': _placeID ?? '',
+      'name': _placeName ?? '',
+      'rating': _rating ?? 0,
+      'types': _types ?? [],
+      'lat': _latitude ?? 0.0,
+      'lng': _longitude ?? 0.0,
+      'formatted_address': _placesFormattedAddrees ?? '',
+      'image_url': _imageUrl ?? '',
+      'reviews': _reviews ?? [],
     };
   }
 
+  factory Place.fromDocument(docs) {
+    return Place(
+      id: docs?.data()['place_id'] ?? '',
+      name: docs?.data()['name'] ?? '',
+      rating: docs?.data()['rating'] ?? 0,
+      types: List<String>.from(docs?.data()['types'] ?? []) ?? [],
+      lat: docs?.data()['lat'] ?? 0.0,
+      long: docs?.data()['lng'] ?? 0.0,
+      address: docs?.data()['formatted_address'] ?? '',
+      imageUrl: docs?.data()['image_url'] ?? '',
+      // reviews: List<Map<String, dynamic>>.from(
+      //         docs?.data()['reviews']?.map((x) => x ?? {})) ??[],
+      reviews: [],
+    );
+  }
+
   factory Place.fromMap(Map<String, dynamic> map) {
-    Place p = Place(
+    return Place(
       id: map['place_id'],
       name: map['name'],
       rating: map['rating'],
@@ -105,9 +102,6 @@ class Place {
       imageUrl: map['image_url'],
       reviews: List<Map<String, dynamic>>.from(map['reviews']?.map((x) => x)),
     );
-    print(p._placeID);
-    print(p._types);
-    return p;
   }
 
   String toJson() => json.encode(toMap());

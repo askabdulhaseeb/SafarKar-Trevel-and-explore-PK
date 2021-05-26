@@ -2,8 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:safarkarappfyp/core/myColors.dart';
-import 'package:safarkarappfyp/database/databaseMethod.dart';
-import 'package:safarkarappfyp/database/placesMethods.dart';
+import 'package:safarkarappfyp/database/planMethods.dart';
 import 'package:safarkarappfyp/database/userLocalData.dart';
 import 'package:safarkarappfyp/models/plan.dart';
 import 'package:safarkarappfyp/providers/placesproviders.dart';
@@ -11,8 +10,10 @@ import 'package:safarkarappfyp/providers/tripDateTimeProvider.dart';
 
 class SavePlanButton extends StatelessWidget {
   final GlobalKey<FormState> _globalKey;
-  SavePlanButton({
+  final TextEditingController controller;
+  const SavePlanButton({
     @required globalKey,
+    @required this.controller,
   }) : this._globalKey = globalKey;
   @override
   Widget build(BuildContext context) {
@@ -24,21 +25,25 @@ class SavePlanButton extends StatelessWidget {
           PlacesProvider placesProvider =
               Provider.of<PlacesProvider>(context, listen: false);
           Plan _plan = Plan(
+            planID: '',
             uid: UserLocalData.getUserUID(),
-            planName: 'planName',
-            departurePlaceID: placesProvider.startingPoint.getPlaceID(),
-            destinationPlaceID: placesProvider.endingPoint.getPlaceID(),
-            planType: 'planType',
+            planName: controller?.text?.trim(),
+            departurePlaceID: placesProvider?.startingPoint?.getPlaceID(),
+            destinationPlaceID: placesProvider?.endingPoint?.getPlaceID(),
+            planType: placesProvider?.endingPoint?.getPlaceTypes(),
             isPublic: true,
             likes: 0,
             budget: 0,
             timeStemp: Timestamp.now(),
-            departureTime: tripDateTimeProvider.departureTime.getFormatedTime(),
-            destinationTime: tripDateTimeProvider.returnTime.getFormatedTime(),
-            departureDate: tripDateTimeProvider.startingDate.getFormatedDate(),
-            returnDate: tripDateTimeProvider.returnTime.getFormatedTime(),
+            departureTime:
+                tripDateTimeProvider?.departureTime?.getFormatedTime(),
+            destinationTime:
+                tripDateTimeProvider?.returnTime?.getFormatedTime(),
+            departureDate:
+                tripDateTimeProvider?.startingDate?.getFormatedDate(),
+            returnDate: tripDateTimeProvider?.returnTime?.getFormatedTime(),
           );
-          await PlacesMethods().storePlanAtFirebase(_plan);
+          await PlanMethods().storePlanAtFirebase(_plan);
         } else {
           print('Error in Button');
         }

@@ -54,7 +54,10 @@ class SuggestedPlannerScreen extends StatelessWidget {
                           .returnTime,
                     ),
                     const SizedBox(height: 10),
-                    SavePlanButton(globalKey: _globalKey),
+                    SavePlanButton(
+                      globalKey: _globalKey,
+                      controller: _planName,
+                    ),
                   ],
                 ),
               ),
