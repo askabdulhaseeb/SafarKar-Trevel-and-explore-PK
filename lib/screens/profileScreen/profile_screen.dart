@@ -18,7 +18,19 @@ class ProfileScreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
-          children: [CircularProfileImage(imageUrl: _user.imageURL)],
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Center(
+              child:
+                  CircularProfileImage(imageUrl: _user?.imageURL, radius: 64),
+            ),
+            const SizedBox(height: 14),
+            Text(
+              _user.displayName,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
+            )
+          ],
         ),
       ),
     );
