@@ -13,14 +13,21 @@ class PlanMethods {
 
   storePlanAtFirebase(Plan plan) async {
     await FirebaseFirestore.instance
-        .collection('plans')
+        .collection(_fPlan)
         .add(plan.toMap())
         .then((value) => FirebaseFirestore.instance
-            .collection('plans')
+            .collection(_fPlan)
             .doc(value.id)
             .update({'planID': value.id}))
         .catchError((Object obj) {
       print('Error');
     });
+  }
+
+  getPlanOfSpecificType({@required String type}) async {
+    return FirebaseFirestore.instance
+        .collection(_fPlan)
+        .where('planType', arrayContains: type)
+        .snapshots();
   }
 }

@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:safarkarappfyp/core/myColors.dart';
 import 'package:safarkarappfyp/database/databaseMethod.dart';
+import 'package:safarkarappfyp/database/planMethods.dart';
 import 'package:safarkarappfyp/database/userLocalData.dart';
 import '../homeScreen/homeScreen.dart';
 
@@ -11,10 +13,16 @@ class PlansFeedScreen extends StatefulWidget {
 }
 
 class _PlansFeedScreenState extends State<PlansFeedScreen> {
+  List<String> _userInterest;
+  QuerySnapshot _querySnapshot;
   _initPage() async {
     await DatabaseMethods().storeUserInfoInLocalStorageFromFirebase(
       UserLocalData.getUserUID(),
     );
+    _userInterest = UserLocalData.getUserInterest();
+    _userInterest.forEach((type) async{
+      var temp=await PlanMethods().getPlanOfSpecificType(type: type);
+    })
   }
 
   @override
