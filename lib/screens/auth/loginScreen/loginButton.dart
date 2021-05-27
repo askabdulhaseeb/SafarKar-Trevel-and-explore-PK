@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:safarkarappfyp/auth/authorisation.dart';
 import 'package:safarkarappfyp/core/myColors.dart';
-import 'package:safarkarappfyp/screens/startingScreen/startingScreen.dart';
+import 'package:safarkarappfyp/screens/planFeedScreen/plans_feed_screen.dart';
 import 'package:safarkarappfyp/screens/widgets/showLoadingDialog.dart';
 
 class LoginButton extends StatelessWidget {
@@ -36,7 +36,9 @@ class LoginButton extends StatelessWidget {
           Navigator.of(context).pop();
           if (_user != null) {
             Navigator.of(context).pushNamedAndRemoveUntil(
-                StartingScreen.routeName, (route) => false);
+              PlansFeedScreen.routeName,
+              (route) => false,
+            );
           } else {
             Fluttertoast.showToast(
               msg: 'Incorrect Email or Password',

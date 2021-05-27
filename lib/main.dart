@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:safarkarappfyp/screens/allPlacesTypeScreen/all_places_type_screeen.dart';
+import 'package:safarkarappfyp/screens/planFeedScreen/plans_feed_screen.dart';
 import './core/myColors.dart';
 import './screens/myPlannerScreen/my_planner_screen.dart';
 import './screens/placeDeatilScreen/placeDetailScreen.dart';
@@ -14,7 +15,6 @@ import './providers/trips.dart';
 import './screens/splashScreen/welcomeScreen.dart';
 import './screens/auth/loginScreen/loginScreen.dart';
 import './screens/auth/signupScreen/signupScreen.dart';
-import './screens/startingScreen/startingScreen.dart';
 import './screens/homeScreen/homeScreen.dart';
 import './screens/PlannerForm/plannerFormScreen.dart';
 import './screens/plannerListViewScreen/plannerListViewScreen.dart';
@@ -54,7 +54,7 @@ class MyApp extends StatelessWidget {
               AllPlacesTypeScreen.routeName: (ctx) => AllPlacesTypeScreen(),
               LoginScreen.routeName: (ctx) => LoginScreen(),
               SignUpScreen.routeName: (ctx) => SignUpScreen(),
-              StartingScreen.routeName: (ctx) => StartingScreen(),
+              PlansFeedScreen.routeName: (ctx) => PlansFeedScreen(),
               HomeScreen.routeName: (ctx) => HomeScreen(),
               PlannerFormScreen.routeName: (ctx) => PlannerFormScreen(),
               SuggestedPlannerScreen.routeName: (ctx) =>

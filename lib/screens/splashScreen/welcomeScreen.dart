@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:safarkarappfyp/core/myFonts.dart';
 import 'package:safarkarappfyp/core/myPhotos.dart';
 import 'package:safarkarappfyp/database/userLocalData.dart';
-import 'package:safarkarappfyp/screens/homeScreen/homeScreen.dart';
+import 'package:safarkarappfyp/screens/planFeedScreen/plans_feed_screen.dart';
 import '../../screens/auth/loginScreen/loginScreen.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -22,7 +22,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         (UserLocalData.getUserUID() == null || UserLocalData.getUserUID() == '')
             ? Navigator.of(context).pushReplacementNamed(LoginScreen.routeName)
             : Navigator.of(context).pushNamedAndRemoveUntil(
-                HomeScreen.routeName, (route) => false);
+                PlansFeedScreen.routeName, (route) => false);
       },
     );
   }

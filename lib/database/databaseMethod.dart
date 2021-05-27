@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:safarkarappfyp/database/userLocalData.dart';
+import 'package:safarkarappfyp/models/app_user.dart';
 
 class DatabaseMethods {
   static const String _fUser = 'users';
@@ -29,13 +30,15 @@ class DatabaseMethods {
   }
 
   storeUserInfoInLocalStorageFromFirebase(String uid) async {
-    DocumentSnapshot _user =
+    DocumentSnapshot docs =
         await FirebaseFirestore.instance.collection("users").doc(uid).get();
+    final AppUser user = AppUser.fromDocument(docs);
     UserLocalData.setUserUID(uid);
-    UserLocalData.setUserEmail(_user?.data()['email'] ?? '');
-    UserLocalData.setUserDisplayName(_user?.data()['displayName'] ?? '');
-    UserLocalData.setUserPhoneNumber(_user?.data()['phoneNumber'] ?? '');
-    UserLocalData.setUserImageUrl(_user?.data()['imageUrl'] ?? '');
+    UserLocalData.setUserEmail(user?.email ?? '');
+    UserLocalData.setUserDisplayName(user?.displayName ?? '');
+    UserLocalData.setUserPhoneNumber(user?.phoneNumber ?? '');
+    UserLocalData.setUserImageUrl(user?.imageURL ?? '');
+    UserLocalData.setUserInterest(user?.interest ?? []);
   }
 
   storeUserInfoInLocalStorageFromGoogle(User user) {

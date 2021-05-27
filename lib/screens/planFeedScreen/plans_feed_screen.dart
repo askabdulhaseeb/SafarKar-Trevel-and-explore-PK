@@ -1,9 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:safarkarappfyp/core/myColors.dart';
+import 'package:safarkarappfyp/database/databaseMethod.dart';
+import 'package:safarkarappfyp/database/userLocalData.dart';
 import '../homeScreen/homeScreen.dart';
 
-class StartingScreen extends StatelessWidget {
-  static final routeName = '/StartingScreen';
+class PlansFeedScreen extends StatefulWidget {
+  static final routeName = '/PlansFeedScreen';
+  @override
+  _PlansFeedScreenState createState() => _PlansFeedScreenState();
+}
+
+class _PlansFeedScreenState extends State<PlansFeedScreen> {
+  _initPage() async {
+    await DatabaseMethods().storeUserInfoInLocalStorageFromFirebase(
+      UserLocalData.getUserUID(),
+    );
+  }
+
+  @override
+  void initState() {
+    _initPage();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
