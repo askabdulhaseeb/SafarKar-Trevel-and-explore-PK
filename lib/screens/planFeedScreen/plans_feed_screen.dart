@@ -20,9 +20,9 @@ class _PlansFeedScreenState extends State<PlansFeedScreen> {
       UserLocalData.getUserUID(),
     );
     _userInterest = UserLocalData.getUserInterest();
-    _userInterest.forEach((type) async{
-      var temp=await PlanMethods().getPlanOfSpecificType(type: type);
-    })
+    _userInterest.forEach((type) async {
+      var temp = await PlanMethods().getPlanOfSpecificType(type: type);
+    });
   }
 
   @override

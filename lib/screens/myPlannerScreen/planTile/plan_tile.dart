@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:safarkarappfyp/models/plan.dart';
 import 'package:safarkarappfyp/providers/placesproviders.dart';
 import 'package:safarkarappfyp/screens/myPlannerScreen/planTile/plan_tile_header.dart';
+import 'package:safarkarappfyp/screens/planDetailListView/plan_detail_list_view.dart';
 import 'package:safarkarappfyp/screens/widgets/landscape_image.dart';
 
 class PlanTile extends StatefulWidget {
@@ -19,79 +20,91 @@ class _PlanTileState extends State<PlanTile> {
       color: Colors.white,
       fontWeight: FontWeight.w500,
     );
-    return Container(
-      height: 200,
-      width: double.infinity,
-      margin: const EdgeInsets.symmetric(vertical: 6),
-      child: Stack(
-        children: [
-          LandscapeImageWidget(
-            imageUrl: widget.place[widget.plan.destinationPlaceID]
-                ?.getPlaceImageUrl(),
-            height: 200,
-          ),
-          Container(
-            decoration: BoxDecoration(
-              color: Colors.black38,
-              borderRadius: BorderRadius.circular(10),
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => PlanDetailListView(
+              plan: widget.plan,
+              place: widget.place,
             ),
-            height: 200,
-            width: double.infinity,
           ),
-          Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+        );
+      },
+      child: Container(
+        height: 200,
+        width: double.infinity,
+        margin: const EdgeInsets.symmetric(vertical: 6),
+        child: Stack(
+          children: [
+            LandscapeImageWidget(
+              imageUrl: widget.place[widget.plan.destinationPlaceID]
+                  ?.getPlaceImageUrl(),
+              height: 200,
+            ),
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.black38,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              height: 200,
+              width: double.infinity,
+            ),
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    PlanTileHeader(name: widget.plan?.planName),
+                    Text(
+                      'From: ${widget.place[widget.plan?.departurePlaceID]?.getPlaceName()}',
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                      style: simpleTextStyle,
+                    ),
+                    Text(
+                      widget.plan?.departureDate,
+                      style: simpleTextStyle,
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      'To: ${widget.place[widget.plan?.destinationPlaceID]?.getPlaceName()}',
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                      style: simpleTextStyle,
+                    ),
+                    Text(
+                      widget.plan?.returnDate,
+                      style: simpleTextStyle,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Positioned(
+              bottom: 10,
+              right: 10,
+              left: 10,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  PlanTileHeader(name: widget.plan?.planName),
                   Text(
-                    'From: ${widget.place[widget.plan?.departurePlaceID]?.getPlaceName()}',
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
+                    'Like: ${widget.plan?.likes?.toString()}',
                     style: simpleTextStyle,
                   ),
                   Text(
-                    widget.plan?.departureDate,
-                    style: simpleTextStyle,
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    'To: ${widget.place[widget.plan?.destinationPlaceID]?.getPlaceName()}',
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
-                    style: simpleTextStyle,
-                  ),
-                  Text(
-                    widget.plan?.returnDate,
+                    'Budget: ${widget.plan?.budget?.toString()}',
                     style: simpleTextStyle,
                   ),
                 ],
               ),
             ),
-          ),
-          Positioned(
-            bottom: 10,
-            right: 10,
-            left: 10,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Like: ${widget.plan?.likes?.toString()}',
-                  style: simpleTextStyle,
-                ),
-                Text(
-                  'Budget: ${widget.plan?.budget?.toString()}',
-                  style: simpleTextStyle,
-                ),
-              ],
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
