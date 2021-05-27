@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:safarkarappfyp/providers/placesproviders.dart';
@@ -9,10 +10,16 @@ import 'package:safarkarappfyp/screens/widgets/homeAppBar.dart';
 
 import 'widgets/showPlaceWithDateAndTime.dart';
 
-class SuggestedPlannerScreen extends StatelessWidget {
+class SuggestedPlannerScreen extends StatefulWidget {
   static final routeName = '/SuggestedPlannerScreen';
+  @override
+  _SuggestedPlannerScreenState createState() => _SuggestedPlannerScreenState();
+}
+
+class _SuggestedPlannerScreenState extends State<SuggestedPlannerScreen> {
   final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
   final TextEditingController _planName = TextEditingController();
+  bool _isPublic = true;
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +35,33 @@ class SuggestedPlannerScreen extends StatelessWidget {
               SuggestPlannerHeaderText(),
               ValidePlanName(planName: _planName),
               const SizedBox(height: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.7,
+                    alignment: Alignment.centerRight,
+                    child: Text(
+                      'Show this plan to all users',
+                      overflow: TextOverflow.ellipsis,
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.w300),
+                    ),
+                  ),
+                  CupertinoSwitch(
+                    value: _isPublic,
+                    onChanged: (bool value) {
+                      setState(() {
+                        _isPublic = value;
+                      });
+                    },
+                  ),
+                ],
+              ),
+              // onTap: () { setState(() { _lights = !_lights; }); },
+              // ),
+              const SizedBox(height: 10),
+
               Flexible(
                 child: ListView(
                   scrollDirection: Axis.vertical,
@@ -57,6 +91,7 @@ class SuggestedPlannerScreen extends StatelessWidget {
                     SavePlanButton(
                       globalKey: _globalKey,
                       controller: _planName,
+                      isPublic: _isPublic,
                     ),
                   ],
                 ),

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:safarkarappfyp/core/myColors.dart';
+import 'package:safarkarappfyp/database/databaseMethod.dart';
 import 'package:safarkarappfyp/database/planMethods.dart';
 import 'package:safarkarappfyp/database/userLocalData.dart';
 import 'package:safarkarappfyp/models/plan.dart';
@@ -13,9 +14,11 @@ import 'package:safarkarappfyp/screens/widgets/showLoadingDialog.dart';
 class SavePlanButton extends StatelessWidget {
   final GlobalKey<FormState> _globalKey;
   final TextEditingController controller;
+  final bool isPublic;
   const SavePlanButton({
     @required globalKey,
     @required this.controller,
+    @required this.isPublic,
   }) : this._globalKey = globalKey;
   @override
   Widget build(BuildContext context) {
@@ -27,14 +30,15 @@ class SavePlanButton extends StatelessWidget {
               Provider.of<TripDateTimeProvider>(context, listen: false);
           PlacesProvider placesProvider =
               Provider.of<PlacesProvider>(context, listen: false);
+          List<String> _plantype = placesProvider?.endingPoint?.getPlaceTypes();
           Plan _plan = Plan(
             planID: '',
             uid: UserLocalData.getUserUID(),
             planName: controller?.text?.trim(),
             departurePlaceID: placesProvider?.startingPoint?.getPlaceID(),
             destinationPlaceID: placesProvider?.endingPoint?.getPlaceID(),
-            planType: placesProvider?.endingPoint?.getPlaceTypes(),
-            isPublic: true,
+            planType: _plantype,
+            isPublic: isPublic,
             likes: 0,
             budget: 0,
             timeStemp: Timestamp.now(),
@@ -47,6 +51,18 @@ class SavePlanButton extends StatelessWidget {
             returnDate: tripDateTimeProvider?.endingDate?.getFormatedDate(),
           );
           await PlanMethods().storePlanAtFirebase(_plan);
+
+          final List<String> _userInterest = UserLocalData.getUserInterest();
+          _plantype?.forEach((pType) {
+            if (!_userInterest.contains(pType)) {
+              _userInterest.add(pType);
+            }
+          });
+          await DatabaseMethods().updateUserDoc(
+            uid: UserLocalData.getUserUID(),
+            userMap: {'interest': _userInterest},
+          );
+          UserLocalData.setUserInterest(_userInterest);
           Navigator.of(context).pushNamedAndRemoveUntil(
             HomeScreen.routeName,
             (route) => false,
