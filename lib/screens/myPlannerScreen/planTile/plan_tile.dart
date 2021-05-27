@@ -58,6 +58,7 @@ class _PlanTileState extends State<PlanTile> {
                     widget.plan?.departureDate,
                     style: simpleTextStyle,
                   ),
+                  const SizedBox(height: 8),
                   Text(
                     'To: ${widget.place[widget.plan?.destinationPlaceID]?.getPlaceName()}',
                     overflow: TextOverflow.ellipsis,

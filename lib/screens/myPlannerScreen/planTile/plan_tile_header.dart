@@ -19,13 +19,16 @@ class _PlanTileHeaderState extends State<PlanTileHeader> {
       ),
       child: Row(
         children: [
-          Text(
-            widget.name ?? 'Name found issue',
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-              fontWeight: FontWeight.w600,
-              fontSize: 20,
-              color: Colors.white,
+          SizedBox(
+            width: MediaQuery.of(context).size.width * 0.70,
+            child: Text(
+              widget.name ?? 'Name found issue',
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 20,
+                color: Colors.white,
+              ),
             ),
           ),
           Spacer(),

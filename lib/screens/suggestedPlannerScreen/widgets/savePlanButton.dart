@@ -8,6 +8,7 @@ import 'package:safarkarappfyp/models/plan.dart';
 import 'package:safarkarappfyp/providers/placesproviders.dart';
 import 'package:safarkarappfyp/providers/tripDateTimeProvider.dart';
 import 'package:safarkarappfyp/screens/homeScreen/homeScreen.dart';
+import 'package:safarkarappfyp/screens/widgets/showLoadingDialog.dart';
 
 class SavePlanButton extends StatelessWidget {
   final GlobalKey<FormState> _globalKey;
@@ -21,6 +22,7 @@ class SavePlanButton extends StatelessWidget {
     return GestureDetector(
       onTap: () async {
         if (_globalKey.currentState.validate()) {
+          showLoadingDislog(context, 'message');
           TripDateTimeProvider tripDateTimeProvider =
               Provider.of<TripDateTimeProvider>(context, listen: false);
           PlacesProvider placesProvider =

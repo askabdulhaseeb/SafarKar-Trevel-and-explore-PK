@@ -15,6 +15,10 @@ class PlanMethods {
     await FirebaseFirestore.instance
         .collection('plans')
         .add(plan.toMap())
+        .then((value) => FirebaseFirestore.instance
+            .collection('plans')
+            .doc(value.id)
+            .update({'planID': value.id}))
         .catchError((Object obj) {
       print('Error');
     });
