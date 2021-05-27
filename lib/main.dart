@@ -1,10 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:safarkarappfyp/core/myColors.dart';
-import 'package:safarkarappfyp/screens/myPlannerScreen/my_planner_screen.dart';
-import 'package:safarkarappfyp/screens/placeDeatilScreen/placeDetailScreen.dart';
-import 'package:safarkarappfyp/screens/profileScreen/profile_screen.dart';
+import 'package:safarkarappfyp/screens/allPlacesTypeScreen/all_places_type_screeen.dart';
+import './core/myColors.dart';
+import './screens/myPlannerScreen/my_planner_screen.dart';
+import './screens/placeDeatilScreen/placeDetailScreen.dart';
+import './screens/profileScreen/profile_screen.dart';
 import './screens/suggestedPlannerScreen/seggestedPlannerScreen.dart';
 import './providers/tripDateTimeProvider.dart';
 import './database/userLocalData.dart';
@@ -47,9 +48,10 @@ class MyApp extends StatelessWidget {
               visualDensity: VisualDensity.adaptivePlatformDensity,
               iconTheme: IconThemeData(color: greenShade),
             ),
-            home: WelcomeScreen(),
+            home: AllPlacesTypeScreen(),
             routes: {
               WelcomeScreen.routeName: (ctx) => WelcomeScreen(),
+              AllPlacesTypeScreen.routeName: (ctx) => AllPlacesTypeScreen(),
               LoginScreen.routeName: (ctx) => LoginScreen(),
               SignUpScreen.routeName: (ctx) => SignUpScreen(),
               StartingScreen.routeName: (ctx) => StartingScreen(),
