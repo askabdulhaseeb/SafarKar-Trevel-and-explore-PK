@@ -68,35 +68,82 @@ class _ShowGoogleMapState extends State<ShowGoogleMap> {
 
   @override
   Widget build(BuildContext context) {
-    return GoogleMap(
-      key: _scaffoldKey,
-      mapType: MapType.normal,
-      initialCameraPosition: _kGooglePlex,
-      myLocationButtonEnabled: true,
-      myLocationEnabled: true,
-      zoomGesturesEnabled: true,
-      zoomControlsEnabled: true,
-      onMapCreated: (GoogleMapController controller) {
-        _completer.complete(controller);
-        _googleMapController = controller;
-        _getUserCurrentLocation();
-      },
-      markers: {
-        if (_origin != null) _origin,
-        if (_destination != null) _destination
-      },
-      polylines: {
+    return Stack(
+      children: [
+        GoogleMap(
+          key: _scaffoldKey,
+          mapType: MapType.normal,
+          initialCameraPosition: _kGooglePlex,
+          myLocationButtonEnabled: true,
+          myLocationEnabled: true,
+          zoomGesturesEnabled: true,
+          zoomControlsEnabled: true,
+          onMapCreated: (GoogleMapController controller) {
+            _completer.complete(controller);
+            _googleMapController = controller;
+            _getUserCurrentLocation();
+          },
+          markers: {
+            if (_origin != null) _origin,
+            if (_destination != null) _destination
+          },
+          polylines: {
+            if (_info != null)
+              Polyline(
+                polylineId: PolylineId(widget.plan.planID),
+                color: greenShade,
+                width: 5,
+                points: _info.polylinePoints
+                    .map((e) => LatLng(e.latitude, e.longitude))
+                    .toList(),
+              ),
+          },
+        ),
         if (_info != null)
-          Polyline(
-            polylineId: PolylineId(widget.plan.planID),
-            color: greenShade,
-            width: 5,
-            points: _info.polylinePoints
-                .map((e) => LatLng(e.latitude, e.longitude))
-                .toList(),
+          Positioned(
+            top: 20.0,
+            left: 60,
+            right: 60,
+            child: Container(
+              alignment: Alignment.center,
+              padding: const EdgeInsets.symmetric(
+                vertical: 6.0,
+                horizontal: 12.0,
+              ),
+              decoration: BoxDecoration(
+                color: greenShade,
+                borderRadius: BorderRadius.circular(20.0),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.black26,
+                    offset: Offset(0, 2),
+                    blurRadius: 6.0,
+                  )
+                ],
+              ),
+              child: Column(
+                children: [
+                  Text(
+                    'Distance: ${_info.totalDistance}',
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  Text(
+                    'Time: ${_info.totalDuration}',
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
-      },
-      // onLongPress: _addMarker,
+      ],
     );
   }
 
