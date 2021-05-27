@@ -48,7 +48,7 @@ class MyApp extends StatelessWidget {
               visualDensity: VisualDensity.adaptivePlatformDensity,
               iconTheme: IconThemeData(color: greenShade),
             ),
-            home: AllPlacesTypeScreen(),
+            home: WelcomeScreen(),
             routes: {
               WelcomeScreen.routeName: (ctx) => WelcomeScreen(),
               AllPlacesTypeScreen.routeName: (ctx) => AllPlacesTypeScreen(),
