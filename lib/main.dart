@@ -18,7 +18,7 @@ import './screens/auth/signupScreen/signupScreen.dart';
 import './screens/homeScreen/homeScreen.dart';
 import './screens/PlannerForm/plannerFormScreen.dart';
 import './screens/plannerListViewScreen/plannerListViewScreen.dart';
-import './screens/plannerMapScreen/plannerMapScreen.dart';
+import 'screens/plannerMapScreen/plan_map_view_screen.dart';
 import './screens/plannerForm/aboutLocations/SearchLocation/SearchStartingPoint.dart';
 import './screens/plannerForm/aboutLocations/SearchLocation/searchEndingPoint.dart';
 
@@ -63,7 +63,7 @@ class MyApp extends StatelessWidget {
               SearchStartingPoint.routeName: (ctx) => SearchStartingPoint(),
               SearchEndingPoint.routeName: (ctx) => SearchEndingPoint(),
               PlannerListViewScreen.routeName: (ctx) => PlannerListViewScreen(),
-              PlannerMapScreen.routeName: (ctx) => PlannerMapScreen(),
+              PlanMapViewScreen.routeName: (ctx) => PlanMapViewScreen(),
               MyPlannerScreen.routeName: (ctx) => MyPlannerScreen(),
               ProfileScreen.routeName: (ctx) => ProfileScreen(),
             },

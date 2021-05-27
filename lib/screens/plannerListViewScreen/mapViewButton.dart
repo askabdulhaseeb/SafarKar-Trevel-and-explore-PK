@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:safarkarappfyp/core/myColors.dart';
 import 'package:safarkarappfyp/core/myFonts.dart';
-import '../plannerMapScreen/plannerMapScreen.dart';
+import '../plannerMapScreen/plan_map_view_screen.dart';
 
 class MapViewButton extends StatelessWidget {
   @override
@@ -11,7 +11,7 @@ class MapViewButton extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           //TODO:on Select Trip Go to Ralitive Planner Page
-          Navigator.of(context).pushNamed(PlannerMapScreen.routeName);
+          Navigator.of(context).pushNamed(PlanMapViewScreen.routeName);
         },
         child: Container(
           width: double.infinity,

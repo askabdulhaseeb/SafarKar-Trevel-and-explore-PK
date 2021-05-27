@@ -23,6 +23,8 @@ dependencies:
 
   google_sign_in: ^5.0.1
 
+  dio: ^4.0.0
+  flutter_polyline_points: ^1.0.0
   google_maps_flutter: ^2.0.2
   geolocator: ^7.0.1
   http: ^0.13.1

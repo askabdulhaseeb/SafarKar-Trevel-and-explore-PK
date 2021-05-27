@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:safarkarappfyp/models/plan.dart';
 import 'package:safarkarappfyp/providers/placesproviders.dart';
 import 'package:safarkarappfyp/screens/planDetailListView/place_time_detail_card.dart';
+import 'package:safarkarappfyp/screens/plannerMapScreen/plan_map_view_screen.dart';
 import 'package:safarkarappfyp/screens/widgets/homeAppBar.dart';
 
 class PlanDetailListView extends StatefulWidget {
@@ -71,7 +72,14 @@ class _PlanDetailListViewState extends State<PlanDetailListView> {
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.map),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) =>
+                  PlanMapViewScreen(plan: widget.plan, place: widget.place),
+            ),
+          );
+        },
       ),
     );
   }
