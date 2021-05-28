@@ -10,8 +10,8 @@ class PlanMapViewScreen extends StatelessWidget {
 
   const PlanMapViewScreen({
     Key key,
-    @required this.plan,
-    @required this.place,
+    this.plan,
+    this.place,
   }) : super(key: key);
 
   @override

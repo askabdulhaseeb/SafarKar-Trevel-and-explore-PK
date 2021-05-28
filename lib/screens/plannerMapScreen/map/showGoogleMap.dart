@@ -53,10 +53,21 @@ class _ShowGoogleMapState extends State<ShowGoogleMap> {
     print(address);
   }
 
+  setInitialCam() {
+    CameraPosition _currentCameraPosition = new CameraPosition(
+      target: _origin.position,
+      zoom: 14,
+    );
+
+    _googleMapController
+        .animateCamera(CameraUpdate.newCameraPosition(_currentCameraPosition));
+  }
+
   _initPage() async {
     _origin = _getMarker(widget.place[widget.plan?.departurePlaceID]);
     _destination = _getMarker(widget.place[widget.plan?.destinationPlaceID]);
     _getDuration();
+    setInitialCam();
     setState(() {});
   }
 
@@ -81,7 +92,8 @@ class _ShowGoogleMapState extends State<ShowGoogleMap> {
           onMapCreated: (GoogleMapController controller) {
             _completer.complete(controller);
             _googleMapController = controller;
-            _getUserCurrentLocation();
+            // _getUserCurrentLocation();
+            setInitialCam();
           },
           markers: {
             if (_origin != null) _origin,
