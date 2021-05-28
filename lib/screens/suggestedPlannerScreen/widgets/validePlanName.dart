@@ -27,6 +27,7 @@ class _ValidePlanNameState extends State<ValidePlanName> {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: widget._planName,
+      autofocus: true,
       keyboardType: TextInputType.name,
       maxLines: 1,
       validator: (value) {

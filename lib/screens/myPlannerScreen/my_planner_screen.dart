@@ -61,41 +61,52 @@ class _MyPlannerScreenState extends State<MyPlannerScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: homeAppBar(context),
-      body: isLoading
-          ? Center(child: CircularProgressIndicator())
-          : Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 14),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Here are all your plans',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w300,
-                      fontSize: 20,
-                    ),
-                  ),
-                  Expanded(
-                    child: ListView.builder(
-                      itemCount: _plan?.length ?? 0,
-                      itemBuilder: (context, index) {
-                        if (_plan?.length == 0)
-                          return Center(
-                            child: Text(
-                              '''You don't have any plan to show yet''',
-                              style: TextStyle(
-                                fontWeight: FontWeight.w300,
-                                fontSize: 20,
-                              ),
-                            ),
-                          );
-                        return PlanTile(plan: _plan[index], place: _places);
-                      },
-                    ),
-                  ),
-                ],
+      body: (_plan?.length == 0)
+          ? Center(
+              child: Text(
+                'You have no plan yet',
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
+            )
+          : isLoading
+              ? Center(child: CircularProgressIndicator())
+              : Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 14),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Here are all your plans',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w300,
+                          fontSize: 20,
+                        ),
+                      ),
+                      Expanded(
+                        child: ListView.builder(
+                          itemCount: _plan?.length ?? 0,
+                          itemBuilder: (context, index) {
+                            if (_plan?.length == 0)
+                              return Center(
+                                child: Text(
+                                  '''You don't have any plan to show yet''',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w300,
+                                    fontSize: 20,
+                                  ),
+                                ),
+                              );
+                            return PlanTile(plan: _plan[index], place: _places);
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
     );
   }
 }
