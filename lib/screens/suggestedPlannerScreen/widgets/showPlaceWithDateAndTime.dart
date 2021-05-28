@@ -87,7 +87,7 @@ class PlaceInfoCard extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => PlaceDetailScreen(p: _place),
+            builder: (context) => PlaceDetailScreen(place: _place),
           ),
         );
       },
