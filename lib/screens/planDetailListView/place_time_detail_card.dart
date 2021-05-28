@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:safarkarappfyp/providers/placesproviders.dart';
+import 'package:safarkarappfyp/screens/placeDeatilScreen/placeDetailScreen.dart';
 import 'package:safarkarappfyp/screens/widgets/landscape_image.dart';
 
 class PlaceTimeDetailsCard extends StatelessWidget {
@@ -15,57 +16,70 @@ class PlaceTimeDetailsCard extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        LandscapeImageWidget(
-          imageUrl: place?.getPlaceImageUrl(),
-          height: 180,
-        ),
-        Container(
-          decoration: BoxDecoration(
-            color: Colors.black38,
-            borderRadius: BorderRadius.circular(10),
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => PlaceDetailScreen(place: place),
           ),
-          height: 180,
-          width: double.infinity,
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 10, top: 24),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                place?.getPlaceName(),
-                overflow: TextOverflow.ellipsis,
-                maxLines: 1,
-                style: TextStyle(
-                  fontSize: 22,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              const SizedBox(height: 10),
-              Text(
-                'Date: $date',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              const SizedBox(height: 2),
-              Text(
-                'Time: $time',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ],
+        );
+      },
+      child: Stack(
+        children: [
+          Hero(
+            tag: place?.getPlaceID() ?? '',
+            child: LandscapeImageWidget(
+              imageUrl: place?.getPlaceImageUrl(),
+              height: 180,
+            ),
           ),
-        )
-      ],
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.black38,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            height: 180,
+            width: double.infinity,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 10, top: 24),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  place?.getPlaceName(),
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                  style: TextStyle(
+                    fontSize: 22,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  'Date: $date',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                const SizedBox(height: 2),
+                Text(
+                  'Time: $time',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 }

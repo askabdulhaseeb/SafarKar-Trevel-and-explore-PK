@@ -4,6 +4,9 @@ import 'package:safarkarappfyp/core/myColors.dart';
 import 'package:safarkarappfyp/database/databaseMethod.dart';
 import 'package:safarkarappfyp/database/planMethods.dart';
 import 'package:safarkarappfyp/database/userLocalData.dart';
+import 'package:safarkarappfyp/models/app_user.dart';
+import 'package:safarkarappfyp/models/plan.dart';
+import 'package:safarkarappfyp/screens/planFeedScreen/feed_tile.dart';
 import '../homeScreen/homeScreen.dart';
 
 class PlansFeedScreen extends StatefulWidget {
@@ -13,21 +16,25 @@ class PlansFeedScreen extends StatefulWidget {
 }
 
 class _PlansFeedScreenState extends State<PlansFeedScreen> {
-  List<String> _userInterest;
-  QuerySnapshot _querySnapshot;
+  // List<String> _userInterest;
+  // QuerySnapshot _querySnapshot;
+  Stream _feed;
   _initPage() async {
-    await DatabaseMethods().storeUserInfoInLocalStorageFromFirebase(
-      UserLocalData.getUserUID(),
-    );
-    _userInterest = UserLocalData.getUserInterest();
-    _userInterest.forEach((type) async {
-      var temp = await PlanMethods().getPlanOfSpecificType(type: type);
-    });
+    // await DatabaseMethods().storeUserInfoInLocalStorageFromFirebase(
+    //   UserLocalData.getUserUID(),
+    // );
+    // _userInterest = UserLocalData.getUserInterest();
+    // _userInterest.forEach((type) async {
+    //   var temp = await PlanMethods().getPlanOfSpecificType(type: type);
+    // });
+    _feed = await PlanMethods().getAllPublicPlans();
+    setState(() {});
   }
 
   @override
   void initState() {
     _initPage();
+
     super.initState();
   }
 
@@ -37,17 +44,35 @@ class _PlansFeedScreenState extends State<PlansFeedScreen> {
       body: Stack(
         fit: StackFit.expand,
         children: [
-          Image.asset(
-            'assets/images/startingScreenBackgroundPic.png',
-            fit: BoxFit.fill,
-          ),
-          Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.center,
-                  end: Alignment.bottomCenter,
-                  colors: [Colors.transparent, Colors.black]),
-            ),
+          // Image.asset(
+          //   'assets/images/startingScreenBackgroundPic.png',
+          //   fit: BoxFit.fill,
+          // ),
+          // Container(
+          //   decoration: BoxDecoration(
+          //     gradient: LinearGradient(
+          //         begin: Alignment.center,
+          //         end: Alignment.bottomCenter,
+          //         colors: [Colors.transparent, Colors.black]),
+          //   ),
+          // ),
+          StreamBuilder(
+            stream: _feed,
+            // initialData: initialData ,
+            builder: (context, snapshot) {
+              return (snapshot.hasData)
+                  ? ListView.builder(
+                      itemCount: snapshot?.data?.docs?.length ?? 0,
+                      itemBuilder: (context, index) {
+                        final Plan _plan =
+                            Plan.fromDocument(snapshot?.data?.docs[index]);
+                        return (_plan.uid != UserLocalData.getUserUID())
+                            ? FeedTile(plan: _plan)
+                            : Container();
+                      },
+                    )
+                  : Container();
+            },
           ),
           Positioned(
             bottom: 40,

@@ -30,4 +30,11 @@ class PlanMethods {
         .where('planType', arrayContains: type)
         .snapshots();
   }
+
+  getAllPublicPlans() async {
+    return FirebaseFirestore.instance
+        .collection(_fPlan)
+        .where('isPublic', isEqualTo: true)
+        .snapshots();
+  }
 }
