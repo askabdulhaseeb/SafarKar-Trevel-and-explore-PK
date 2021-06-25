@@ -6,6 +6,7 @@ import 'package:safarkarappfyp/database/planMethods.dart';
 import 'package:safarkarappfyp/database/userLocalData.dart';
 import 'package:safarkarappfyp/models/app_user.dart';
 import 'package:safarkarappfyp/models/plan.dart';
+import 'package:safarkarappfyp/models/suggest_places.dart';
 import 'package:safarkarappfyp/screens/planFeedScreen/feed_tile.dart';
 import '../homeScreen/homeScreen.dart';
 
@@ -20,6 +21,7 @@ class _PlansFeedScreenState extends State<PlansFeedScreen> {
   // QuerySnapshot _querySnapshot;
   Stream _feed;
   _initPage() async {
+    SuggestPlacesFromAPI().getSuggestion();
     // await DatabaseMethods().storeUserInfoInLocalStorageFromFirebase(
     //   UserLocalData.getUserUID(),
     // );
