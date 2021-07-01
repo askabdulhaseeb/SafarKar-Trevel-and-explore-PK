@@ -4,6 +4,7 @@ import 'package:safarkarappfyp/core/myColors.dart';
 import 'package:safarkarappfyp/core/myFonts.dart';
 import 'package:safarkarappfyp/database/userLocalData.dart';
 import 'package:safarkarappfyp/screens/myPlannerScreen/my_planner_screen.dart';
+import 'package:safarkarappfyp/screens/reportProblemScreen/report_problem_screen.dart';
 import 'circlerImageLarge.dart';
 import '../../auth/loginScreen/loginScreen.dart';
 import 'drawerTile.dart';
@@ -53,7 +54,10 @@ class HomeDrawer extends StatelessWidget {
                 DrawerTile(
                   icon: Icons.report,
                   title: 'Report Problem',
-                  onPress: () {},
+                  onPress: () {
+                    Navigator.of(context)
+                        .pushNamed(ReportProblemScreen.routeName);
+                  },
                 ),
               ],
             ),

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:safarkarappfyp/screens/allPlacesTypeScreen/all_places_type_screeen.dart';
 import 'package:safarkarappfyp/screens/planFeedScreen/plans_feed_screen.dart';
-import 'package:safarkarappfyp/screens/reportProbleScreen/report_problem_screen.dart';
+import 'package:safarkarappfyp/screens/reportProblemScreen/report_problem_screen.dart';
 import './core/myColors.dart';
 import './screens/myPlannerScreen/my_planner_screen.dart';
 import './screens/placeDeatilScreen/placeDetailScreen.dart';

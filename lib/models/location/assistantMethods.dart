@@ -6,6 +6,8 @@ import 'package:safarkarappfyp/database/placesMethods.dart';
 import 'package:safarkarappfyp/models/location/placesPreditions.dart';
 import 'package:safarkarappfyp/providers/placesproviders.dart';
 import 'requestAssistants.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert' as convert;
 
 class AssistantMethods {
   static Future<String> searchCoordinateAddress(
@@ -205,6 +207,16 @@ class AssistantMethods {
           .updateEndingPoint(_place);
       PlacesMethods().storePlaceInfoInFirebase(_place);
     }
+  }
+
+  Future<List<Place>> getNearbyPlaces(
+      double lat, double lng, String placeType) async {
+    var url =
+        'https://maps.googleapis.com/maps/api/place/textsearch/json?location=$lat,$lng&type=$placeType&rankby=distance&key=$placesAPI';
+    var response = await http.get(Uri.parse(url));
+    var json = convert.jsonDecode(response.body);
+    var jsonResults = json['results'] as List;
+    return jsonResults.map((place) => Place.fromJson(place)).toList();
   }
 }
 

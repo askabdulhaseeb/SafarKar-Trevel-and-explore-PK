@@ -1,7 +1,5 @@
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
-import 'package:safarkarappfyp/database/userLocalData.dart';
 
 class SuggestPlacesFromAPI {
   void getSuggestion() async {
@@ -14,6 +12,7 @@ class SuggestPlacesFromAPI {
 
     if (response.statusCode == 200) {
       print(await response.stream.bytesToString());
+      var mapp = await response.stream.bytesToString();
     } else {
       print(response.reasonPhrase);
     }

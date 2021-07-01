@@ -22,6 +22,11 @@ class _SuggestedPlannerScreenState extends State<SuggestedPlannerScreen> {
   bool _isPublic = true;
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: homeAppBar(context),

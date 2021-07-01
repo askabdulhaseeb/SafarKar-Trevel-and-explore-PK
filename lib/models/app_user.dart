@@ -29,7 +29,7 @@ class AppUser {
     };
   }
 
-  factory AppUser.fromDocument(DocumentSnapshot docs) {
+  factory AppUser.fromDocument(docs) {
     return AppUser(
       uid: docs?.data()['uid'].toString(),
       displayName: docs?.data()['displayName'].toString() ?? '',
